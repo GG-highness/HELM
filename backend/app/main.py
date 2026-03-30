@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+from app.core.database import check_db_connection
+
 app = FastAPI(
     title="HELM API",
     description="Holistic Effect & Level Meter — カードバランス予測API",
@@ -9,4 +11,5 @@ app = FastAPI(
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "ok"}
+    db_ok = check_db_connection()
+    return {"status": "ok", "db": "connected" if db_ok else "disconnected"}
