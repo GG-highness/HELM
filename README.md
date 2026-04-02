@@ -34,3 +34,36 @@ HELMは、カードの効果テキストをルールベースで分解・数値�
 | スコアリング | ルールベース（正規表現 + キーワードマッチング + ポイント加算） |
 | API方式 | REST API |
 | テスト | pytest（バックエンド）/ Vitest + React Testing Library（フロントエンド） |
+
+## 環境構築
+
+### 前提条件
+- Docker Desktop または Rancher Desktop がインストールされていること
+
+### 手順
+
+**1. リポジトリをクローン**
+```bash
+git clone https://github.com/GG-highness/HELM.git
+cd HELM
+```
+
+**2. コンテナを起動**
+```bash
+docker compose up --build
+```
+
+**3. Alembic の初期設定（初回のみ）**
+```bash
+docker compose exec backend alembic init alembic
+```
+
+**4. マイグレーション実行**
+```bash
+docker compose exec backend alembic upgrade head
+```
+
+### 動作確認
+- フロントエンド: http://localhost:3000
+- バックエンド Swagger UI: http://localhost:8000/docs
+- ヘルスチェック: http://localhost:8000/api/health

@@ -17,7 +17,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/app:/app/app
+      - ./backend:/app
     environment:
       DATABASE_URL: mysql+pymysql://helm:helm@db:3306/helm
     depends_on:

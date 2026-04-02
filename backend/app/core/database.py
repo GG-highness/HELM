@@ -1,14 +1,14 @@
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy import text
+from sqlmodel import SQLModel, create_engine, Session
 
 from .config import DATABASE_URL
 
 engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-class Base(DeclarativeBase):
-    pass
+def get_session():
+    with Session(engine) as session:
+        yield session
 
 
 def check_db_connection() -> bool:
