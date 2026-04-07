@@ -1,3 +1,5 @@
+"""Application config."""
+
 import os
 
 DATABASE_URL: str = os.getenv(

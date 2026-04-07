@@ -1,0 +1,23 @@
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+exclude = ["alembic/", "venv/"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "D"]
+ignore = [
+    "D203",  # one-blank-line-before-class (D211 と競合)
+    "D213",  # multi-line-summary-second-line (D212 と競合)
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "."
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+ignore_missing_imports = true

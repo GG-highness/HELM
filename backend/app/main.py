@@ -1,3 +1,5 @@
+"""HELM backend entry point."""
+
 from fastapi import FastAPI
 
 from app.core.database import check_db_connection
@@ -10,6 +12,7 @@ app = FastAPI(
 
 
 @app.get("/api/health")
-async def health_check():
+async def health_check() -> dict[str, str]:
+    """APIのヘルスチェックを行う."""
     db_ok = check_db_connection()
     return {"status": "ok", "db": "connected" if db_ok else "disconnected"}

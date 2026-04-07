@@ -1,20 +1,28 @@
+"""CardSet model."""
+
 from sqlmodel import Field, SQLModel
 
 
 class CardSetBase(SQLModel):
-    code: str = Field(unique=True, description="弾コード（例: OP01, ST01）")
-    name: str = Field(description="弾名（例: ROMANCE DAWN）")
+    """CardSetBase."""
+
+    code: str = Field(unique=True, description="Set code (e.g. OP01, ST01).")
+    name: str = Field(description="Set name (e.g. ROMANCE DAWN).")
 
 
 class CardSet(CardSetBase, table=True):
+    """CardSet."""
+
     __tablename__ = "card_sets"
 
-    id: int | None = Field(default=None, primary_key=True)
+    id: int | None = Field(default=None, primary_key=True, description="Primary key.")
 
 
 class CardSetCreate(CardSetBase):
-    pass
+    """CardSetCreate."""
 
 
 class CardSetRead(CardSetBase):
-    id: int
+    """CardSetRead."""
+
+    id: int = Field(description="Primary key.")
