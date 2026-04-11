@@ -26,5 +26,5 @@
       }
     }
   },
-  "postCreateCommand": "pip install -r /workspace/backend/requirements.txt && mkdir -p /root/.ssh && cp -r /tmp/host-ssh/. /root/.ssh/ && chmod 700 /root/.ssh && find /root/.ssh -type f -exec chmod 600 {} \\; && ssh-keyscan github.com >> /root/.ssh/known_hosts 2>/dev/null"
+  "postCreateCommand": "pip install -r /workspace/backend/requirements.txt && pre-commit install && mkdir -p /root/.ssh && cp -r /tmp/host-ssh/. /root/.ssh/ && chmod 700 /root/.ssh && find /root/.ssh -type f -exec chmod 600 {} \\; && ssh-keyscan github.com >> /root/.ssh/known_hosts 2>/dev/null"
 }
