@@ -39,8 +39,9 @@ HELMは、カードの効果テキストをルールベースで分解・数値�
 
 ### 前提条件
 - Docker Desktop または Rancher Desktop がインストールされていること
+- VS Code + [Dev Containers 拡張機能](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) がインストールされていること
 
-### 手順
+### Dev Containers を使った起動（推奨）
 
 **1. リポジトリをクローン**
 ```bash
@@ -48,19 +49,35 @@ git clone https://github.com/GG-highness/HELM.git
 cd HELM
 ```
 
-**2. コンテナを起動**
+**2. VS Code で開く**
 ```bash
-docker compose up --build
+code .
 ```
 
-**3. Alembic の初期設定（初回のみ）**
-```bash
-docker compose exec backend alembic init alembic
-```
+**3. Dev Container で開き直す**
+
+`Ctrl+Shift+P` → `Dev Containers: Reopen in Container`
+
+VS Code が自動的に Docker コンテナをビルドし、backend コンテナに接続します。
 
 **4. マイグレーション実行**
 ```bash
-docker compose exec backend alembic upgrade head
+cd /app && alembic upgrade head
+```
+
+### Dev Containers の構成について
+
+`.devcontainer/devcontainer.json` の設定：
+
+- **接続先コンテナ**: backend（`docker-compose.yml` の `backend` サービス）
+- **workspaceFolder**: `/workspace`（モノレポルート）
+- **理由**: `docker-compose.yml` に `.:/workspace` のボリュームマウントがあるため、Dev Containers がモノレポルートを `/workspace` として認識する。`workspaceFolder` を `/app`（backendのみ）に設定しても `/workspace` が優先されるため、`/workspace` に統一している
+- **効果**: VS Code のエクスプローラーから `frontend/` と `backend/` の両方を編集できる
+
+### Docker Compose のみで起動する場合
+
+```bash
+docker compose up --build
 ```
 
 ### 動作確認
