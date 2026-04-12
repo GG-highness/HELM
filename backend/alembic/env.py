@@ -10,6 +10,7 @@ from sqlmodel import SQLModel
 from app.core.config import DATABASE_URL
 from app.models.card_name import CardName  # noqa: F401
 from app.models.card_set import CardSet  # noqa: F401
+from app.models.card import Card  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
